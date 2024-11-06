@@ -6,27 +6,30 @@ The dataset can be constructed followed by [Bayesian Loss](https://github.com/Zh
 ## Pretrained model
 The pretrained model can be downloaded from [GoogleDrive](https://drive.google.com/drive/folders/1TJF2IeFPoeLzqNXKXXXK8nPH62HijZaS?usp=sharing).
 
-## Traina and Test
+## Test
 
 ```
-1. generate segmentations for each image with SEEM as pseudo labels (run_gen_sam_labels.py)
-2. train a counting network with pseudo labels (run_train_counter.py)
-3. predict the location with the counting network (run_resam.py)
-4. use the prediction as prompts to generate new masks with SEEM + point prompt (run_resam.py)
-5. merge the new masks with the old masks (we can skip this now. This part needs more time)
+python test.py --data-dir PATH_TO_DATASET --save-dir PATH_TO_CHECKPOINT
+```
+
+## Train
+
+```
+python train.py --data-dir PATH_TO_DATASET --save-dir PATH_TO_CHECKPOINT
 ```
 
 ### Citation
 If you use our code or models in your research, please cite with:
 
 ```
-@inproceedings{wan2025robust,
-  title={Robust Zero-Shot Crowd Counting and Localization With Adaptive Resolution SAM},
-  author={Wan, Jia and Wu, Qiangqiang and Lin, Wei and Chan, Antoni},
-  booktitle={European Conference on Computer Vision},
-  pages={478--495},
-  year={2025},
-  organization={Springer}
+@InProceedings{Wan_2021_CVPR,
+    author    = {Wan, Jia and Liu, Ziquan and Chan, Antoni B.},
+    title     = {A Generalized Loss Function for Crowd Counting and Localization},
+    booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+    year      = {2021},
+    pages     = {1974-1983}
 }
 ```
 
+### Acknowledgement
+We use [GeomLoss](https://www.kernel-operations.io/geomloss/) package to compute transport matrix. Thanks for the authors for providing this fantastic tool. The code is slightly modified to adapt to our framework.
